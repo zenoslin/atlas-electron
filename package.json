@@ -4,7 +4,8 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "/Users/zenoslin/Documents/GitHub/atlas-electron/lib/atlas-generator /Users/zenoslin/Documents/GitHub/atlas-electron/lib/atlasConfig.json"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
