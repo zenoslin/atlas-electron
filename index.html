@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Atlas Electron</title>
+
+    <link href="./src/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Atlas Electron</h1>
+            <p>to tiny your PNG JPG and Gif</p>
+            <p>
+                <button class="btn btn-lg btn-primary" id="input-btn">选择路径</button>
+                <input id="input-path" value="./ui"></input>
+            </p>
+            <p>
+                <button class="btn btn-lg btn-primary" id="output-btn">输出路径</button>
+                <input id="output-path" value="./ui/temp"></input>
+            </p>
+            <p>
+                <button class="btn btn-lg btn-primary" id="tiny-btn">开始打包</button>
+                <span id="log-span">点击开始</span>
+            </p>
+        </div>
+
+        <script src="./src/jquery.min.js"></script>
+        <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+        <script src="./src/bootstrap.min.js"></script>
+        <script>
+            // You can also require other files to run in this process
+            require('./renderer.js')
+        </script>
+</body>
+
+</html>

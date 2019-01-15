@@ -1,0 +1,32 @@
+{
+    "inputDir": "/Users/linze/Documents/GitHub/atlas-electron/assets",
+    "outputDir": "/Users/linze/Documents/GitHub/atlas-electron/bin/atlas",
+    "resDir": "/Users/linze/Documents/GitHub/atlas-electron/bin",
+    "force": true,
+    "includeList": [],
+    "excludeList": [],
+    "extrudeList": [],
+    "atlas": {
+        "width": "2048",
+        "height": "2048",
+        "size": 2048,
+        "quality": -1,
+        "pixelFormat": "ARGB32",
+        "POT": false,
+        "textureFormat": "PNG"
+    },
+    "scaleDir": {},
+    "data": {
+        "format": "atlas",
+        "compact": true
+    },
+    "sprite": {
+        "width": "512",
+        "height": "512",
+        "size": 512,
+        "rotation": false,
+        "extrude": 1,
+        "padding": 1,
+        "cropAlpha": false
+    }
+}
