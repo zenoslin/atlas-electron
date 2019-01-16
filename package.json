@@ -5,9 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "/Users/zenoslin/Documents/GitHub/atlas-electron/lib/atlas-generator /Users/zenoslin/Documents/GitHub/atlas-electron/lib/atlasConfig.json"
+    "pack": "/Users/linze/Documents/GitHub/atlas-electron/lib/atlasGenerator --config /Users/linze/Documents/GitHub/atlas-electron/lib/atlasConfig"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/zenoslin/atlas-electron",
   "keywords": [
     "Electron",
     "quick",

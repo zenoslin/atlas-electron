@@ -15,7 +15,7 @@ function createWindow() {
   // 创建浏览器窗口。
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 480
+    height: 520
     // resizable: false
   })
 

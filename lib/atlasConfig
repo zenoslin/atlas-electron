@@ -1,0 +1,21 @@
+{
+    "atlas": {
+        "textureFormat": "png32",
+        "height": 2048,
+        "powerOfTwo": false,
+        "width": 2048
+    },
+    "inputDir": "/Users/linze/Documents/GitHub/atlas-electron/assets/comp",
+    "resDir": "",
+    "includeList": [""],
+    "force": true,
+    "sprite": {
+        "height": 2048,
+        "cropAlpha": false,
+        "width": 2048,
+        "padding": 2
+    },
+    "excludeList": [""],
+    "extrudeList": [""],
+    "outputDir": "/Users/linze/Documents/GitHub/atlas-electron/assets"
+}
