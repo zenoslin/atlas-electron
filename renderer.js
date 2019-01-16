@@ -14,9 +14,9 @@ const outputPath = document.getElementById('output-path')
 const tinyBtn = document.getElementById('tiny-btn')
 const logSpan = document.getElementById('log-span')
 
-let _inputPath = "/Users/linze/Documents/GitHub/atlas-electron/assets/comp/"
+let _inputPath = "/Users/linze/Documents/GitHub/atlas-electron/assets/comp"
 let _outputPath = "/Users/linze/Documents/GitHub/atlas-electron/bin"
-let jsonPath = __dirname + "/lib/atlasConfig.json"
+let jsonPath = __dirname + "/lib/atlasConfig"
 
 inputPath.value = _inputPath
 outputPath.value = _outputPath

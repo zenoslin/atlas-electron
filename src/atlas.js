@@ -5,7 +5,7 @@ const Byte = require('./Byte')
 
 function atlas(cmd, callback) {
     if (!cmd) {
-        cmd = path.resolve(__dirname, '..') + "/lib/atlas-generator" + " --config " + path.resolve(__dirname, '..') + "/lib/atlasConfig"
+        cmd = path.resolve(__dirname, '..') + "/lib/atlasGenerator" + " --config " + path.resolve(__dirname, '..') + "/lib/atlasConfig"
     }
     childProcess.exec(cmd, {
         encoding: "binary",
