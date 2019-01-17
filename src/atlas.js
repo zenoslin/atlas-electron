@@ -18,76 +18,52 @@ function atlas(cmd, callback) {
 }
 
 function editJson(path, key, value, callback) {
-    fs.readFile(path, function (err, data) {
-        if (err) {
-            // console.error(err)
-            alert(err)
-        }
-        let person = data.toString() //将二进制的数据转换为字符串
-        person = JSON.parse(person) //将字符串转换为json对象
-        if (typeof value == "object") {
-            person[key] = value[0]
-        } else {
-            person[key] = value
-        }
-        let str = JSON.stringify(person) //因为nodejs的写入文件只认识字符串或者二进制数，所以把json对象转换成字符串重新写入json文件中
-        fs.writeFile(path, str, function (err) {
-            if (err) {
-                // console.error(err)
-                alert(err)
-            }
-            console.log('修改成功')
-            console.log(person)
-        })
-    })
+    let data = fs.readFileSync(path, {encoding: "utf8"})
+    let configData = data.toString() //将二进制的数据转换为字符串
+    configData = JSON.parse(configData) //将字符串转换为json对象
+    if (typeof value == "object") {
+        configData[key] = value[0]
+    } else {
+        configData[key] = value
+    }
+    let str = JSON.stringify(configData) //因为nodejs的写入文件只认识字符串或者二进制数，所以把json对象转换成字符串重新写入json文件中
+    fs.writeFileSync(path, str, {encoding: "binary"})
+    console.log('修改成功' + str)
     if (callback) {
         callback()
     }
 }
 
 function json2pd(path, callback) {
-    fs.readFile(path, (err, data) => {
+    let data = fs.readFileSync(path, {encoding: "utf8"})
+    let configData = data.toString() //将二进制的数据转换为字符串
+    configData = JSON.parse(configData) //将字符串转换为json对象
+    let count = 0
+    for (let s in configData.frames) {
+        count++
+    }
+    let totalData = new Byte()
+    totalData.writeInt32(count)
+    console.log(path + count)
+    for (var k in configData.frames) {
+        var p = configData.frames[k]
+        totalData.writeUTFString(k)
+        totalData.writeInt16(p.frame["x"])
+        totalData.writeInt16(p.frame["y"])
+        totalData.writeInt16(p.frame["w"])
+        totalData.writeInt16(p.frame["h"])
+    }
+    let arr = new Uint8Array(totalData.buffer)
+    console.log(arr)
+    let pdPath = path.replace(".atlas", ".pd")
+    fs.writeFileSync(pdPath, arr, {encoding: "binary"})
+    fs.unlink(path, (err) => {
         if (err) {
             // console.error(err)
             alert(err)
         }
-        let person = data.toString() //将二进制的数据转换为字符串
-        person = JSON.parse(person) //将字符串转换为json对象
-        let count = 0
-        for (let s in person.frames) {
-            count++
-        }
-        let totalData = new Byte()
-        totalData.writeInt32(count)
-        for (var k in Object.frames) {
-            var p = obj.frames[k]
-            totalData.writeUTFString(k)
-            totalData.writeInt16(p.frames["x"])
-            totalData.writeInt16(p.frames["y"])
-            totalData.writeInt16(p.frames["w"])
-            totalData.writeInt16(p.frames["h"])
-        }
-        let arr = new Uint8Array(totalData.buffer)
-        console.log(arr)
-        let pdPath = path.replace(".atlas", ".pd")
-        fs.writeFile(pdPath, arr, {
-            encoding: "binary"
-        }, (err) => {
-            if (err) {
-                // console.error(err)
-                alert(err)
-            }
-            console.log('生成' + pdPath)
-            fs.unlink(path, (err) => {
-                if (err) {
-                    // console.error(err)
-                    alert(err)
-                }
-                console.log('删除' + path)
-            })
-            callback()
-        })
-
+        console.log('删除' + path)
+        callback()
     })
 }
 

@@ -13,6 +13,7 @@ const inputPath = document.getElementById('input-path')
 const outputPath = document.getElementById('output-path')
 const tinyBtn = document.getElementById('tiny-btn')
 const logSpan = document.getElementById('log-span')
+const devBtn = document.getElementById('dev-btn')
 
 let _inputPath = "/Users/linze/Documents/GitHub/atlas-electron/assets/comp"
 let _outputPath = "/Users/linze/Documents/GitHub/atlas-electron/bin"
@@ -31,6 +32,11 @@ outputBtn.addEventListener('click', (event) => {
     ipcRenderer.send('open-file-dialog-output')
 })
 
+devBtn.addEventListener('click', (event) => {
+    console.log('打开开发者工具')
+    ipcRenderer.send('open-dev-tool')
+})
+
 ipcRenderer.on('input-path', (event, path) => {
     console.log(`收到完成信息 ${path}`)
     _inputPath = path
@@ -47,18 +53,19 @@ tinyBtn.addEventListener('click', (event) => {
     _inputPath = inputPath.value
     _outputPath = outputPath.value
     logSpan.innerHTML = "正在打包"
-    editJson(jsonPath, "inputDir", _inputPath)
-    editJson(jsonPath, "outputDir", _outputPath)
-    editJson(jsonPath, "resDir", _outputPath + "/img")
-    atlas(false, function () {
-        logSpan.innerHTML = "打包完成"
-        alert('打包完成')
-        // let fileName = _inputPath.substr(_inputPath.lastIndexOf("/") + 1)
-        // json2pd(_outputPath + "/" + fileName + ".atlas", () => {
-        //     logSpan.innerHTML = "打包完成"
-        //     alert('打包完成')
-        // })
-    })
+    editJson(jsonPath, "inputDir", _inputPath, () =>{
+        editJson(jsonPath, "outputDir", _outputPath, () => {
+            editJson(jsonPath, "resDir", _outputPath + "/img", () =>{
+                atlas(false, function () {
+                    let fileName = _inputPath.substr(_inputPath.lastIndexOf("/") + 1)
+                    json2pd(_outputPath + "/" + fileName + ".atlas", () => {
+                        logSpan.innerHTML = "打包完成"
+                        alert('打包完成')
+                    })
+                })
+            })
+        })
+    })    
 })
 
 //Js拖入文件

@@ -15,15 +15,15 @@ function createWindow() {
   // 创建浏览器窗口。
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 520
-    // resizable: false
+    height: 580,
+    resizable: false
   })
 
   // 然后加载应用的 index.html。
   mainWindow.loadFile('index.html')
 
   // 打开开发者工具
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // 当 window 被关闭，这个事件会被触发。
   mainWindow.on('closed', function () {
@@ -78,4 +78,9 @@ ipcMain.on('open-file-dialog-output', (event) => {
       event.sender.send('output-path', files)
     }
   })
+})
+
+//打开开发者工具
+ipcMain.on('open-dev-tool', (event) => {
+  mainWindow.webContents.openDevTools()
 })

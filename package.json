@@ -5,7 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "/Users/linze/Documents/GitHub/atlas-electron/lib/atlasGenerator --config /Users/linze/Documents/GitHub/atlas-electron/lib/atlasConfig"
+    "packagerMac": "electron-packager ./ --platform=mas --arch=x64",
+    "packagerWin": "electron-packager . imagemin --platform=win32 --arch=x64 --out=out --asar",
+    "pdPack": "/Users/linze/Documents/GitHub/atlas-electron/lib/atlasGenerator --config /Users/linze/Documents/GitHub/atlas-electron/lib/atlasConfig"
   },
   "repository": "https://github.com/zenoslin/atlas-electron",
   "keywords": [
@@ -18,6 +20,7 @@
   "author": "zenoslin",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^4.0.1"
+    "electron": "^4.0.1",
+    "electron-packager": "^13.0.1"
   }
 }
