@@ -2,9 +2,9 @@
 
 [![GitHub release](https://img.shields.io/badge/release-v0.1.0-blue.svg)](https://github.com/zenoslin/atlas-electron/releases)
 
-A atlas tools build by `electron` + `node.js`.
+基于`electron`和`node.js`的图集打包工具
 
-To pack `png` & `jpg` to atlas
+用于打包 `png` 和 `jpg` 
 
 ## How to start
 
@@ -21,5 +21,6 @@ npm run start
 并用以下js代码分解分base64的图片数组
 
 ## correlation
-github：[分解图集](https://github.com/zenoslin/javascript-demo/tree/master/JavaScript/%E5%9B%BE%E9%9B%86%E5%88%86%E8%A7%A3)
-github：[图集播放](https://github.com/zenoslin/atlasPlayer)
+
+- github：[分解图集](https://github.com/zenoslin/javascript-demo/tree/master/JavaScript/%E5%9B%BE%E9%9B%86%E5%88%86%E8%A7%A3)
+- github：[图集播放](https://github.com/zenoslin/atlasPlayer)
