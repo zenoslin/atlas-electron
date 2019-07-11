@@ -1,5 +1,10 @@
 const { ipcRenderer } = require("electron");
-const { editJson, atlas, json2pd } = require("./src/atlas");
+const { atlas } = require("./src/atlas");
+const {
+  copyFile,
+  checkDirectory,
+  removeFileSync
+} = require("./src/copyFile.js");
 const os = require("os");
 
 const inputBtn = document.getElementById("input-btn");
@@ -46,7 +51,7 @@ ipcRenderer.on("output-path", (event, path) => {
   outputPath.value = `${path}`;
 });
 
-tinyBtn.addEventListener("click", event => {
+tinyBtn.addEventListener("click", async event => {
   _inputPath = inputPath.value;
   _outputPath = outputPath.value;
   if (hasChinese(_inputPath) || hasChinese(_outputPath)) {
@@ -58,23 +63,16 @@ tinyBtn.addEventListener("click", event => {
     window.localStorage.outputPath = _outputPath;
   }
   logSpan.innerHTML = "正在打包";
-  Promise.all([
-    editJson(jsonPath, "inputDir", _inputPath),
-    editJson(jsonPath, "outputDir", _outputPath),
-    editJson(jsonPath, "resDir", _outputPath + "/img")
-  ]).then(() => {
-    atlas(false)
+  let tempFolder = `${__dirname}/temp`;
+  let cmd = `"${__dirname}/lib/atlas-generator" -S 2048 -s 512 ${__dirname}/temp -o ${_outputPath} --dataFormat json --scale 1 --force`;
+  await checkDirectory(tempFolder);
+  copyFile(_inputPath, tempFolder).then(() => {
+    atlas(cmd)
       .then(res => {
+        removeFileSync(tempFolder);
         console.log(res);
-        let fileName = _inputPath.substr(_inputPath.lastIndexOf("/") + 1);
-        json2pd(_outputPath + "/" + fileName + ".atlas")
-          .then(() => {
-            logSpan.innerHTML = "打包完成";
-            alert("打包完成");
-          })
-          .catch(err => {
-            alert(err);
-          });
+        alert("打包完成");
+        logSpan.innerHTML = "点击开始";
       })
       .catch(err => {
         alert(err);
